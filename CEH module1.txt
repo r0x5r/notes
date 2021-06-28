@@ -1,0 +1,141 @@
+INTRODUCTION: 
+
+CEH:
+This Certification is provided by EC-Council.
+EC-Council is International Council of Electronic Commerce Consultants.
+Certified ethical hacker are professional who find the bug and fix it and protects from the black hat hackers.
+
+EC-Counsil says,to beat a hacker, you need to think like a hacker.
+We do hack like a  hacker but in a ethical way.
+
+ESSENTIAL TERMINOLOGIES:
+HACK VALUE:for example i have provided with two system for hacking,for hacking the first system i am getting paid but not for the second system so the
+           hack value of the first system is attractive and valuable and worth doing that means hack value.
+Zero day attack:it means exploiting the vulnerability before the developer adentifies it and releases any patches for that vulnerability.
+                 EX:if the target has not updated his system and before updating it, hacker gained access into the target system.
+                    also if u have not your antivirus then hacker can use the new version of antivirus to compromise ur computer an it even not be detected 
+                      by ur antivirus.
+Vulnerability:any bug,loophole or weaknesses which are exploited by hacker and make possible to gain access into ur system,network,etc.
+Daisy Chaining:suppose i got an vulnerability in a system and gained access in that and the device which attached to that system can also be hacked by using the 
+               same vulnerability.
+Exploit:Breaking any system or network using different techniques and methods targeting on the vulnerability.
+Doxing:getting any information of the target like their credential and publishing publically.
+Payload:EX;i have a pen drive where i have injected the virus which is just a set of code so that malicious code or virus is the payload which will i use to corrupt 
+            the target system.
+Bot: bot word came from robot,bot is used to crawl all the internet to give the reponse to our request that is called spider which is a bot that is made by
+     different code.the same technique the hacker has made to perform illegal activities.once the bot software install on the target system the bot give the
+     notification to the attacker that it has been installed and after that hacker can perform any kind of activities there.
+
+ELEMENTS OF INFO. SEC: 
+    Confidentiality,Integrity,Availability,Authenticity,non-repudiation.
+
+SECURITY,FUNCTIONALITY,USABILITY:
+
+MOTIVES,GOALS,AND OBJECTIVES OF INFORMATION SECURITY ATTACKS:
+
+*Attack=Motive(Goal)+Method+Vulnerability
+
+
+
+
+
+
+
+TOP INFORMATION SECURITY ATTACK VECTORS:
+Threat  is those which is harmful to our system,and it can be anything which can harm our system.
+
+1.Cloud Computing Threats:
+2.Advanced Persistent Threats:
+3.Viruses and Worms:
+4.Mobile Threats
+
+
+1.Cloud computing Threats:
+2.Advanced Persistent Threats(APT):
+3.Viruses and Worms:
+4.Mobile Threats:
+5.Insider Attack:
+6.Botnets:
+
+
+HACKING:
+   hacking is gaining unauthorised access to any devices by finding the bug in it and exploiting it.
+Who is Hacker:
+Skills of an ethical hacker:
+     hardware,network(OSI,TCP/IP,TCP,UDP,Switch,Router),
+Server(IIS,apache,nginx,lighttpd,Server 2016),Database(SQL),
+Programming(javascript,asp.net,python,node.js),security principals.
+
+
+TYPES of Hackers:
+   Blackhat:hacking in an illegal way.
+   Whitehat:hacking in a legal way
+   Greyhat:mixture of both white and black.ex;i have hacked any website without the permission of an owner that is illegal and also reported the bug the the
+           company that is greyhat.
+   Script kiddie:hacker who dont have any knowledge about anything and do hacking only by surfing youtube google learning the tools and techniques and have no depth knowledge.
+   Hacktivist:Those hackers who keep their identity hidden.
+              Their main purpose is freedom of speech and exposing fraud going in politics,organization or in country regarding corrution
+              or any thing wrong going in the society.
+   Cyber Terrorist:hacker who  harm the country by attacking the large scale organisation,causes damage to gov system,hospital records,etc
+   Sucide Hackers:aim of distruction without worrying about punishment.
+   State sponsored hacker:hackers which are hired by gov to gain top secrete info.
+   
+PHASES:
+   Reconnaissance:it is the process of gathering all the information about the target.
+                   If it is organisation then who r the employee,the education level,number of employee,the number of devices attached and the type of network they are using.
+                   the ports that are open on the target
+                   what OS the target is using and its version,the email id,ports,etc
+                         TYPES:
+                              Passive: gathering info. without interacting with the target.ex; gathering info using the public or social media searching.
+                                       gathering publically available info. of target. 
+
+                              Active:gaining info by directly interacting with the target,like by calling the target or email them.
+   Scanning:gathering a specific information on the basis of an info. gathered in reconnassaince phase.like i got the IP of target then by using nmap 
+            i can get their domain name,the ports that are open,the version they are using and also can scan many more information.
+   Gaining access:using those gathered info they try to find out the vulnerability and do attack on that vulnerabilty and an hacker get access in the target sysytem
+   Maintaining Access:when an attacker gained access of the system,then he closed all the backdoors that he had created so that at the same time other hacker
+                      couldnt acces it.To have full control over the target without any inturaption.
+                      In this same phase where an hacker can attack other systems from the target system like he can perform DDOS attack,etc.
+   Clearing Track:attacker deletes all his activities he had done on the target system so he couldnt be detected.like if he has made any file or folder
+                  to perform any malicious activities he delete all those and all the logs created by him he clears all of that.
+
+Vulnerability Accessment:
+Penetration Testing:
+
+
+
+KALI LINUX: Linus Torvalds
+        it is a debian based linux distribution which was made for digital forensics and penetration testing.
+           Debian was an OS who used to use linux kernel.Debian was started in 1993 by Ian Murdock.his wife,s name was debra so Ian and Debra is debian.
+The os and the team which maintains the OS that all known as Debian.
+Kali linux is maintained and developed by offnsive security,offensive security is an international comapny which works in info security,digital forensic,PT
+and also gives the OSCP certification.
+Before kali linux Backtrack was used for hacking and later rewroted by Mati Aharoni and Devon Kearns of offensive security and named that as kali linux.
+kali name formed from kernel auditing linux 
+the work was started in 2012 and released in 2013,the version 1.0.
+
+REQUIREMENT SPECIFICATION FOR KALI:
+20gb of hard disk space.
+min 2048MB of ram.
+run both on 32 and 64bit platform
+
+kali Nethunter for android.
+600+ tools preinstalled in kali
+
+
+Download Kali:
+https://cdimage.kali.org/kali-2019.4/
+
+
+
+
+
+
+
+
+
+
+
+
+
+

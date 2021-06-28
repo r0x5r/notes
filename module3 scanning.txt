@@ -1,0 +1,184 @@
+SCANNING:
+after footprinting the next phase is scanning.
+In this module we will see the network scanning.for an example i got an ip address from the first phase now we will scan that ip using different tools and
+try to find out its domain name,the OS, open ports,version,etc.
+
+before scanning,lets learn some about the network,in OSI model there is transport layer which consists of two protocols i.e TCP(transmission control protocol)
+and udp(user datagram protocol) and here we will learn about TCP.
+first what is protocol,protocol is nothing but the set of rule which helps in performing the task in a systematic manner and each protocols has their port number.
+there are two types of port physical and logical.the port is used for end to end connectivity.
+TCP is connection oriented protocol and provides reliability with the help of three way handshake where as udp is connectionless protocol and 
+dont provide reliability.
+before the data is sent,tcp make the connectivity with the server to ensure that both client and server are available for the data sharing,which requires
+three way handshake.
+lets see how three way handshake works:
+syn:the first host sends the syn packet to the second host to establish the connectivity.
+syn+ack:and second host send the syn/ack packet indicating that the packet has been received.
+ack:the first host complete the connection by sending the ack packet to the second host.
+
+in the osi model when data comes from presentation layer to transport layer a header gets attached with the data and a protocol assigned to it and that protocol may be 
+tcp or udp.suppose its TCP and 
+the TCP header contains flag of 9 bits
+syn:initiate the connection.
+ack:acknowledge that the packet has been received.
+RST:reset the connection between two hosts.
+FIN:finishes the connection.
+URG:urgent
+PSH:push
+
+
+ 
+Scanning Methodology:
+
+1.checking for live systems
+2.discovering open ports  
+3.scanning beyond IDS
+4.Banner grabbing and footprinting
+5.scanning vulnerabilities
+6.Network scan
+
+1.Checking for live host:
+to chech the live host we use the ping sweep tool,where we send the host an ICMP(internet control meggage protocol)packet,if the destination host reply to
+ICMP packet then the host is live otherwise it is not live.
+ICMP is network layer protocol which is encapsulated inside the ip.ICMP was discovered to overcome the prblm of IP as IP doestnt report the error.
+2.Discovering open ports:
+we can use nmap to see whether the port is open or not on the target host.if we get the port is open then it will be easy for us to exploit.
+````````````````````````````````````````````````````````````````````````
+3.scanning beyond IDS:
+being a hacker we would not like be to detected by any of the intrusion detection system so for that we use different machanism and if we got detected by IDS
+then it will block us there or block our IP.
+`````````````````````````````````````````````````````````````````````````
+4.Banner grabbing:
+banner grabbing means the port,services,etc which are running at the background.
+``````````````````````````````````````````````````````````````````````````
+5.scanning vulnerabilities:
+Here we scan for the vulnerability in the target host.
+
+6.Network diagram:
+Here we scan like what is the architecture of target network.where the DNS server has been located.what the subnetting they are using,etc.
+
+
+PORTS SCAN TYPES:
+we required the types of ports because there can be different scenario,like we want to scan a window then windows may be running different services and if
+linux then it will have different.so thatswhy there are different scanning methods.
+
+1.full connect scan:(-sT)
+If you have the permission for scanning and to find the vulnerability,then go for proper connection between client and the server as 
+there must be three way handshake which will provide you the full reliability.
+
+2.Stealth scan:(-sS)
+In this type of scan the three way handshake is incomplete as client send the syn packet and server do reply client with ack/syn but
+after that client dont send any ack packet to the server so this is also called as half open scan,this scan is used for bypassing the firewall and 
+to hide the normal traffic.
+
+3.XMAS scan:(-sX)ss
+It is also known as christmas scan which only works on linux.If any of your scan type is not working and the target is linux based then there 
+we can use XMAS scan.URG,PSH AND FIN all flags
+sent together.
+>no response then port is open
+>RST packet received then port is closed.
+
+4.FIN Scan:(-sF)
+FIN Scan is the process of sending the packets havking only
+FIN flag set.These packets can reliably pass the firewall.
+FIN Scan packets,when sent to the target,
+>the port is open if there is no response.
+>and port is closed if RST is returned.
+
+5.NULL Scan:(-sN)
+sending packets without any flag set.
+it is similar to FIN and XMAS scan.
+easy to be detected as no any flag is sent.
+
+6.Inverse TCP flag:
+It means the reverse of normal flow.Ex:if there is three way handshake and if the port is open then we will get the syn/ack packet and if the 
+port is close then then it will send RST packet but in Inverse TCP flag when the port is open then we get nothing and if is closed then we get RST/ACK.
+
+7.ACK flag probe:(-sA -v) -p443
+>ACK packet is sent if there is no response
+then the firewall is present.
+>and if respond with RST packet then the firewall
+is not present.
+
+8.UDP Scanning:(-sU)
+UDP contains no flag as it is connectionless protocol
+
+*Netdiscover to see the live hosts,MAC address
+
+TOOL:
+
+NMAP:is a grt tool for scanning the network as it can scan the services and versions running at the background which is also called as banner grabing
+     status of port are:
+           open:it means the port is open and it is accessible
+           close:it means the port is closed and cant be accessible.
+           filtered:cant be accessible as it is protected by the firewall
+           unfiltered:can be accessible by the nmap but cant identify that is it open or closed.
+
+TARGET SPECIFICATION:
+-iL: It is used to run the file having host name or ip as we feel difficult typing 
+     the number of targets.
+--exclude: If i have given the range of ip address,ex:the target is 10.0.2.1/24 and 
+            if i want to exclude the ip 10.0.2.2 and 10.0.2.3 then this command will
+            help you to.
+--excludefile: it is same as the previous bt the difference is it helps to exclude
+                the target from the file.
+Host Discovery:
+-sP: ping
+-sn: can be used as ping sweep to see if the host is on, a lil difference is that it can scan number of host.it dont scan port 
+-Pn: if we already know the host is on then we can use -Pn flag which treats all host as online.
+     we do this mainly when we dont want to be detected as when we ping then ICMP packet is sent which lead us to be detected.
+--traceroute: To move from host X to host Y then the devices that comes between then will lists out all those.
+
+SCAN TECHNIQUES:
+-sS: (syn scan) It is half open scan,we use this command when we dont want to be detected
+-sT: for TCP scan
+-sU: udp scan
+-sA: ack scan
+-sX: this scan is used in linux only and also protect us from detection.It makes all the tcp flag high that is 1.
+
+PORT SPECIFICATION:
+-P: It scans 1000 ports which is default in nmap.
+-p<port ranges>: only scan specified ports.
+--exclude-ports <port ranges>:exclude the specified ports.
+-F: fast port scan,scans 100 ports.
+
+SERVICE/VERSION DETECTION:
+-sV: determines the services and versions.
+--version-intensity <level>: if u have permission them keep the scanning at high like 9 because it will take time but give u more reliable result.
+                             The range is from 0-9.
+--version-all: try every single probe (intensity 9)
+
+OS DETECTION: 
+-O: can be used to see the target OS.
+--osscan-limit: not to scan aggressively.
+--osscan-guess: guess OS more aggressively.
+
+TIMING AND PERFORMANCE:
+-T<0-5>: it also heps us not to be detected by IDS,by slowing down our packets as we can place it as -T0,if have to send the thousand packets then it will
+         slow down sending 100 100,it wont send it all together.
+
+-A is aggresive scan which scans all like ports,version,OS
+
+-A
+-vv
+-p
+-p-
+-sU
+-sT
+-sS
+-O
+-sV
+-T
+
+ 
+
+
+
+
+
+
+
+
+
+
+ 

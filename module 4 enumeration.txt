@@ -1,0 +1,202 @@
+ENUMERATION:
+
+Enumeration is the third phase of information gathering.
+In this phase,attacker creates active connections to system and perform
+direct queries to gain more information about the target.
+
+1.Enumeration concepts:
+2.NetBios enumeration:
+3.SNMP enumeration:
+4.SMTP and DNS enumeration:
+5.Enumeration counterme asures:
+
+1.Enumeration Concepts:
+>Enumeration can only be done when the attacker is inside
+your network.
+>>In this phase we do active connection with the target.
+>>and we try to gather information by unauthorize access.
+
+Types of info which can be enumerated:
+1.Router info
+2.SNMP info
+3.DNS info
+4.Machine names
+5.OS info
+6.User info
+7.Groups info
+
+Techniques for enumeration:
+ so what are the techniques used by the hacker in order to get these
+type of information.
+
+>>gather user names using email ids:
+for example test@gmail.com, here test is the username and gmail.com
+is the domain.
+
+>>gather information using default password:
+whenever we are purchasing a device the device comes with default
+credentials like admin username and admin password.
+>>Brute force attack
+>>Extract information using DNS zone transfer
+>>Extract user groups from windows
+>>gather information using snmp
+
+Important Services and ports to enumerate:
+
+FTP => 21
+TELNET => 23
+TCP/UDP => DNS => 53
+TCP/UDP => MICROSOFT RPC ENDPOINT MAPPER => 135
+UDP => NETBIOS NAME SERVICE (NBNS) => 137
+TCP => NETBIOS SESSION SERVICE (SMB OVER NETBIOS) => 139
+TCP/UDP => SMB OVER TCP (DIRECT HOST) => 445
+UDP => SIMPLE NETWORK MANAGEMENT PROTOCOL (SNMP) => 161
+TCP/UDP => LIGHTWEIGHT DIRECTORY ACCESS PROTOCOL (LDAP) => 389
+TCP/UDP => GLOBAL CATALOG SERVICE => 3268
+TCP => SIMPLE MAIL TRANSFER PROTOCOL (SMTP)  => 25
+TCP/UDP => SNMP TRAP => 162
+UDP => ISAKMP/INTERNET KEY EXCHANGE (IKS) => 500
+TCP/UDP => SESSION INITIAON PROTOCOL (SIP) => 5060,5061
+DONE....................................................................
+
+2.NetBios enumeration:
+
+NETBIOS (Network Basic input/output system program) ->
+
+It is a system program that allows the communicaion
+in between different applications running
+on different systems within a local area network.
+->It runs on UDP 137 port
+->It will show us the list of machines which belong to a domain,
+->It shows us the file sharing info
+->the username info
+->the group related info
+
+nbtstat -A <ip> for windows
+nbtscan -v -r <ip> for linux
+enum4linux -a <target ip> (mostly used to see the password policy,
+it can b helpful when attacking host in an org.)
+
+3.SNMP enumeration:
+
+SNMP(simple network management protocol)161
+>>It is used to identify network information
+>>in a network there are multiple devices these devices use snmp to
+communicate with each other.
+>>SNMP is very important to make a communication with the networking
+devices but if SNMP is enabled inside your system then it is very big
+drawback for your OS.
+>>By default in all OS the SNMP protocol is turned off.
+
+Exploit SNMP =>
+Method 1 for deep info
+>open msfconsole
+>search snmp
+>(12)use auxiliary/scanner/snmp/snmp_enum
+>show options
+>set rhost <target ip>
+>run
+
+>>The whole snmp related info stored in a database called MIB
+(Management information base)
+
+>>SNMP has three versions.
+1.v1 no encryption and hashing
+2.v2 no encryption and hashing
+3.v3 supports encryption and hashing
+
+4.SMTP and DNS enumeration:
+   SMTP(simple mail transfer protocol)25
+>>if port 25 is open you can able to look into complete mail related info
+>>commands for SMTP =>
+
+1.HELLO => Identify domain name of sender
+2.EXPN => verify the mailbox
+3.MAIL FROM => to identify sender
+4.RCPT TO => specify the message 
+5.SIZE => specify max size
+6.DATA => to define data
+7.RSET => reset the connect
+8.VRFY => verify the mail server
+9.HELP => show help
+10.QUIT => terminate session
+
+>>In case if organisation have SMTP server you can perform enumeration
+>>Netscan tool pro helpful for SMTP enumeration 
+
+>>NMAP: on Metasploitable
+steps:
+>ls -al /usr/share/nmap/scripts/ | grep "smtp"
+>nmap -p25 --script (use any of the script here) <target ip>
+done>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+DNS (Domain Name System) 53 => 
+
+>> robtex.com
+>> dnsstuff.com
+>> nslookup for dns related info
+>> for linux use dig command you can also use nslookup but dig is good for linux.
+
+dig
+>dig host facebook.com
+(get ip and go for who is)
+>>>>cd /pentest/enumeration/dns/dnsmap
+   >./dnsmap facebook.com
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+SMB(Server Message Block):445
+      It is used for file sharing,printer sharing,etc with in a network.
+>>smbclient -L <targer ip> --option='client min protocol=NT1'
+>>smbclient //target ip/tmp
+>>help
+>>pwd
+>>ls 
+ 
+Enumeration countermeasures:
+
+>>Disable SNMP or use SNMP v3
+>>use premium DNS (publically available records will not show)
+>>Disable 445 and 139 ports
+>> while using SMTP use secure connection 
+>> use SSL certificate
+>> disable SMB on web and dns.
+
+
+To find versions:
+           nmap -sV,netdiscover
+           nbtscan:nbtscan <IP> and nbtscan -v <IP/24> and nbtscan -r <IP/24> (to go through entire network)
+To find the directories:
+           dirb <url>,dirsearch,dirbuster
+
+To see the port numbers on our own system:(network statistics)
+             netstat -aon 
+    >-a: It displays all connections and listing ports
+    >-o: Displays the owning process ID associated with each connection.
+    >-n: Displays address and port numbers in numerical form.  
+
+TOOLS:
+NMBLOOKUP:
+nbtscsan:
+SMBMAP:
+SMBclient:
+Rpcclient:
+Nmap:
+Enum4linux:
+
+Websites for default password:
+
+https://cirt.net/
+https://default-password.info
+http://www.passwordsdatabase.com/
+open-sez.me
+
+
+
+
+
+
+
+
+

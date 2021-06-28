@@ -1,0 +1,72 @@
+FOOTPRINTING:
+footprinting is the first most step in ethical hacking which means of gathering all the information about the target and network.info gathering helps an 
+attacker to be more closer to the target.
+if the target is any organisation then how many employess work in that org.,their employee id,email id,there name,etc
+and if the target is any system then wht is the OS the target is using the IP,the version,abt the ports,etc
+we can gather info either actively or passively as these r the types of footprinting.
+
+https://www.my1login.com/resources/password-strength-test/
+
+OBJECTIVES OF FOOTPRINTING:
+1.To know security posture
+2.To reduce focus area
+3.Identify vulnerabilityss
+4.Draw network map
+
+There are different methods and tools for information gathering:
+1.search engine:
+     we can get the information about any organisation or anyone from wikipedia like when the org. established,who is the owner,wht r the servises they provide,etc.
+*there are diff. websites for info gathering for n/w and DNS footprinting and they are:
+      Netcraft:it helps in findin the record of an organisation
+
+      whois.com:  https://whois.domaintools.com/
+      centralops.net: https://centralops.net/co/
+      lookip.net: https://www.lookip.net/
+      
+
+on CLI:ping,nslookup
+
+
+2.google dork:google dork is also known as google hacking.it is the different other way of using the google search engine which hackers and PT use for
+gathering info ins the more efficient manner.
+
+site:search for the result in the given domain.
+
+related:search for similar web sites.
+
+intext:find the specific word in the document
+
+allintitle:finds the specific keyword in the website.
+
+intitle:search for the specific keyword in the title inside the documents
+ 
+allintitle:search for the specific keyword in the title inside the websites.
+
+filetype:search for the specilic files like,pdf,docs,exe,etc
+
+*also there is google hacking database page that provide us the differet ways of using google dork,we can see the diff. dorking commands provided by offensive
+security.
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.
+
+3.Email footprinting:
+Ultratool.com :  https://www.ultratools.com/tools/ipWhoisLookup
+emailtracker pro which we need to download.
+
+SPF: sender policy framework.
+
+
+
+TOOLS ON KALI:
+ Mltego:
+
+The Harvester:theharvestor -d (domain name) -l(l is for limit the search as i have mentioned 500) 500 -b (mention the source through which u want to search
+               like google,linkedin,netcraft,etc)
+ Recon-ng:workspace create facebook=
+modules search=modules load (load the required recon)=
+               info=
+             option set SOURCE facebook.com=run
+          to install modules:
+                             marketspace search whois=marketplace install (path)
+ 
+
+

