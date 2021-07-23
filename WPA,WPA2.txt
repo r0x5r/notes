@@ -1,0 +1,63 @@
+WPA/WPA2:
+
+
+WPA uses encryption dkip
+WPA2 uses encryption ccmp,tkip
+
+both the encryption came to overcome the problem of WEP
+
+>Both can be cracked by using the same methods
+>They are more secure
+>  
+
+
+>There is a feature called WPS
+>If it is enabled then we can get into the network without
+ cracking the key
+
+WPS (wifi Protected Setup)
+>WPS is a feature that can be used with WPA and WPA2
+>Allows clients to connect without password
+>Authentication is done using an 8 digit pin.
+   >8 Digits is very small.
+   >We can try all possible pins in relatively short time.
+   >Then the wps pin can be used to compute the actual password.
+PS: This only works if the router is configured not to use PBC(Push Button Authentication).
+
+
+BEGIN:
+
+>wash --interface wlan0(we use this command to display all the network arround us which has WPS enabled)
+>aireplay-ng --fakeauth 30 -a (mac of router) -h (mac of usb) wlan0
+>reaver --bssid (mac of target router) --channel () --interface wlan0 -vvv --no-associate
+  (reaver bruteforce the possible pins) (-vvv is to say to show as much information as possible)
+
+
+SECOND METHOD:
+
+>it is made to overcome the weakness of wep.
+>when the packets are transmitted,it dont contain any usefull data,as wep used to.
+>We can crack the password by only capturing the handshake packets.
+    These are 4 packets sent when a client connects to the network.
+>the handshake packet is only used to check if the password is valid or not.
+
+1>airodump-ng wlan0
+2>airodump-ng --bssid () --channel () --write () wlan0
+3>aireplay-ng --deauth 4 -a (router) -c (client) wlan0
+  (after capturing the handshake)
+   (we need to create a wordlist)
+
+the handshake packets contains MIC(message intigrity code)
+This MIC is used by the Router to verify the actual password
+>Here aicrack-ng unpack the handshak packet 
+>and match every password from our wordlist to all the data inside the MIC
+>and form another MIC 
+>and matches both the MIC,if both matches then the password is correct and if not
+then it will move to the another password.
+
+4>aircrack-ng (handsahake file) -w (wordlist)
+
+
+
+
+

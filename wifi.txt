@@ -1,0 +1,23 @@
+sudo ip link set wlan0 down
+sudo iw wlan0 set monitor none
+sudo ip link set wlan0 up
+
+
+
+ifconfig wlan0 down;-  command is used for disabling the Managed mode
+airmon-ng check kill ;- command is used to kill any process that could interfere with using my interface in monitor mode. After this command, your internet connection will be lost.
+iwconfig wlan0 mode monitor ;- command is used to enable monitor mode
+ifconfig wlan0 up ;- command is used to enable the interface
+iwconfig ;- command shows that the mode is set to Monitor
+
+
+BSSID:-                                shows the MAC address of the target network
+PWR :-                                 shows the signal strength of the network. Higher the number has better signal
+Beacons:-                          are the frames send by the network in order to broadcast its existence
+#Data,:-                              shows the number of data packets or the number of data frames
+#/s :-                                   shows the number of data packets that we collect in the past 10 seconds
+CH :-                                shows the channel on which the network works on
+ENC :-                           shows the encryption used by the network. It can be WEP, OPN, WPA, WPA2
+CIPHER :-                     shows the cipher used in the network
+AUTH :-                         shows the authentication used on the network
+ESSID :-                         shows the name of the network
